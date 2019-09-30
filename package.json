@@ -5,7 +5,7 @@
   "description": "Generates a wordcloud of some text on the page",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "xo"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/umaar/wordcloud/issues"
   },
-  "homepage": "https://github.com/umaar/wordcloud#readme"
+  "homepage": "https://github.com/umaar/wordcloud#readme",
+  "devDependencies": {
+    "xo": "^0.25.3"
+  }
 }
