@@ -1,0 +1,21 @@
+{
+  "name": "wordcloud",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Generates a wordcloud of some text on the page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umaar/wordcloud.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umaar/wordcloud/issues"
+  },
+  "homepage": "https://github.com/umaar/wordcloud#readme"
+}
