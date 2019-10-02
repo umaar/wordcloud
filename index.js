@@ -1,3 +1,5 @@
+/* global document */
+
 const minCharacterLength = 4;
 
 // http://stackoverflow.com/questions/39776819/function-to-normalize-any-number-from-0-1
@@ -28,7 +30,7 @@ function getWordFrequency(words) {
 }
 
 function getNormalisedWordFrequency(wordFrequenciesMap) {
-	const wordFrequencies = Array.from(wordFrequenciesMap);
+	const wordFrequencies = [...wordFrequenciesMap];
 	const frequencyData = wordFrequencies.map(([, frequency]) => frequency);
 	const maxFrequency = Math.max(...frequencyData);
 
@@ -39,7 +41,7 @@ function getNormalisedWordFrequency(wordFrequenciesMap) {
 }
 
 function createTagCloudTemplate(wordFrequencies) {
-	const container = Array.from(wordFrequencies).reduce((map, [word, frequency]) => {
+	const container = [...wordFrequencies].reduce((map, [word, frequency]) => {
 		const wordItem = document.createElement('li');
 		wordItem.textContent = word;
 		wordItem.style.color = `rgba(0, 48, 225, ${frequency + 0.2})`;
@@ -84,20 +86,20 @@ function getTagCloudStyles() {
 
 	const style = document.createElement('style');
 	style.type = 'text/css';
-	style.appendChild(document.createTextNode(tagCloudStyles));
+	style.append(document.createTextNode(tagCloudStyles));
 	return style;
 }
 
 function init() {
-	const text = cleanText(document.body.innerText);
+	const text = cleanText(document.body.textContent);
 	const words = extractWords(text);
 	const wordFrequency = getWordFrequency(words);
 	const normalisedWordFrequency = getNormalisedWordFrequency(wordFrequency);
 	const template = createTagCloudTemplate(normalisedWordFrequency);
 	const styles = getTagCloudStyles();
 
-	document.body.appendChild(styles);
-	document.body.appendChild(template);
+	document.body.append(styles);
+	document.body.append(template);
 }
 
 init();
