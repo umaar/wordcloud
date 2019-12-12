@@ -6,8 +6,8 @@ const minCharacterLength = 4;
 function normalize(min, max) {
 	const delta = max - min;
 
-	return val => {
-		return parseFloat(((val - min) / delta).toFixed(2));
+	return value => {
+		return parseFloat(((value - min) / delta).toFixed(2));
 	};
 }
 
@@ -17,7 +17,7 @@ function cleanText(text) {
 
 function extractWords(text) {
 	return text.split(' ')
-		.filter(str => str.length >= minCharacterLength)
+		.filter(string => string.length >= minCharacterLength)
 		.map(word => word.toLowerCase())
 		.sort();
 }

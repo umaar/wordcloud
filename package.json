@@ -7,18 +7,11 @@
   "scripts": {
     "test": "xo"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/umaar/wordcloud.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/umaar/wordcloud/issues"
-  },
-  "homepage": "https://github.com/umaar/wordcloud#readme",
   "devDependencies": {
-    "xo": "^0.25.3"
+    "xo": "^0.25.3",
+    "@umaar/personal-eslint-config": "latest"
+  },
+  "xo": {
+    "extends": "./node_modules/@umaar/personal-eslint-config/rules.json"
   }
 }
