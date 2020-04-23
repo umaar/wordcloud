@@ -7,7 +7,7 @@ function normalize(min, max) {
 	const delta = max - min;
 
 	return value => {
-		return parseFloat(((value - min) / delta).toFixed(2));
+		return Number.parseFloat(((value - min) / delta).toFixed(2));
 	};
 }
 
