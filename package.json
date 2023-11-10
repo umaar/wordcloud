@@ -5,7 +5,6 @@
   "description": "Generates a wordcloud of some text on the page",
   "main": "index.js",
   "devDependencies": {
-    "xo": "^0.29.1",
     "@umaar/personal-eslint-config": "latest"
   },
   "xo": {

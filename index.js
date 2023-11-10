@@ -12,11 +12,12 @@ function normalize(min, max) {
 }
 
 function cleanText(text) {
-	return text.replace(/[^A-Za-z]/g, ' ').trim();
+	return text.replaceAll(/[^A-Za-z]/, " ").trim();
 }
 
 function extractWords(text) {
-	return text.split(' ')
+	return text
+		.split(" ")
 		.filter(string => string.length >= minCharacterLength)
 		.map(word => word.toLowerCase())
 		.sort();
@@ -35,23 +36,24 @@ function getNormalisedWordFrequency(wordFrequenciesMap) {
 	const maxFrequency = Math.max(...frequencyData);
 
 	return wordFrequencies.reduce((map, [word, frequency]) => {
-		const normalizedFrequency = frequency > 1 ? normalize(0, maxFrequency)(frequency) : 0;
+		const normalizedFrequency =
+			frequency > 1 ? normalize(0, maxFrequency)(frequency) : 0;
 		return map.set(word, normalizedFrequency);
 	}, new Map());
 }
 
 function createTagCloudTemplate(wordFrequencies) {
 	const container = [...wordFrequencies].reduce((map, [word, frequency]) => {
-		const wordItem = document.createElement('li');
+		const wordItem = document.createElement("li");
 		wordItem.textContent = word;
 		wordItem.style.color = `rgba(0, 48, 225, ${frequency + 0.2})`;
-		wordItem.style.fontSize = `${1 + (frequency * 2)}em`;
+		wordItem.style.fontSize = `${1 + frequency * 2}em`;
 
 		map.append(wordItem);
 		return map;
-	}, document.createElement('ul'));
+	}, document.createElement("ul"));
 
-	container.classList.add('bookmarklet-tag-cloud');
+	container.classList.add("bookmarklet-tag-cloud");
 	return container;
 }
 
@@ -84,8 +86,8 @@ function getTagCloudStyles() {
 		}
 	`;
 
-	const style = document.createElement('style');
-	style.type = 'text/css';
+	const style = document.createElement("style");
+	style.type = "text/css";
 	style.append(document.createTextNode(tagCloudStyles));
 	return style;
 }

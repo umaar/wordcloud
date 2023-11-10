@@ -3,25 +3,32 @@ name: Node CI
 on: [push]
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
+        # Increase if needed, but my projects should generally take less than this
+        timeout-minutes: 15
 
-    runs-on: ubuntu-latest
+        steps:
+            - name: Note the GitHub action timeout of 15 minutes
+              run: echo "::warning ::⏱️ The job has a timeout set to 15 minutes. Increase if needed, within the GitHub actions .yml file."
 
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '*'
+            - uses: actions/checkout@v4
 
-      - name: Cache node modules
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-${{ env.cache-name }}-
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "*"
 
-      - run: npm install --ignore-scripts
-      - run: make test
+            - name: Cache node modules
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-modules-
+                      ${{ runner.os }}-
+
+            - name: Install dependencies
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: make install-ci
+
+            - run: make test

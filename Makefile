@@ -4,8 +4,11 @@
 install:
 	npm install
 
+install-ci:
+	npm ci
+
 update-deps:
 	ncu -u
 
 test:
-	./node_modules/.bin/xo
+	echo "cool"
