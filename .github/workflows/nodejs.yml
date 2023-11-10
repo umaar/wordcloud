@@ -17,18 +17,9 @@ jobs:
             - uses: actions/setup-node@v4
               with:
                   node-version: "*"
-
-            - name: Cache node modules
-              uses: actions/cache@v3
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-modules-
-                      ${{ runner.os }}-
+                  cache: "npm"
 
             - name: Install dependencies
-              if: steps.cache.outputs.cache-hit != 'true'
-              run: make install-ci
+              run: make install
 
             - run: make test
